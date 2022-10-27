@@ -1,0 +1,827 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #eae8e485;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="\home">HHMS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="\home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="\anagraphicAnalysis">Anagraphic analysis</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Prevision
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/heartHealth">Heart Health</a></li>
+                        <li><a class="dropdown-item" href="/deadProbability">Mortality</a></li>
+                        <li><a class="dropdown-item" href="#">Hospitalizations</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/patients">Patients</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="unset()" href="">Log-out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="bg-image"
+    style="background-image: url('https://www.mantovasitiweb.it/images/slider2.jpg');background-size: cover;"><br><br>
+    <!--'https://i.ibb.co/m4K0X2S/slide3.jpg'-->
+    <!--First table with Name, surname, profile photo and other personal info-->
+    <div class="container" style="margin:auto; width: 84rem;">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <h1>{{patient.name}} {{patient.surname}}</h1>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h3>Birthday: {{patient.birthday}}</h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h3>Fiscale Code: {{patient.fiscal_code}}</h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="row" *ngIf="patient.sex==1">
+                                            <h3>Sex: Man</h3>
+                                        </div>
+                                        <div class="row" *ngIf="patient.sex==0">
+                                            <h3>Sex: Woman</h3>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div  >
+                                            
+                                        </div>
+                                        <div class="row" *ngIf="patient.hypertensive==1">
+                                            <h3>Hypertensive subject <button (click)="setUnsetHypertensive()" style="border-color: rgba(0, 0, 0, 0); background-color: rgba(0, 0, 0, 0);"><img src="https://images.emojiterra.com/twitter/v13.1/512px/270f.png" style="width: 0.7cm; height: 0.7cm;"> </button></h3>
+                                        </div>
+                                        <div class="row" *ngIf="patient.hypertensive==0">
+                                            <h3>Not Hypertensive subject <button (click)="setUnsetHypertensive()" style="border-color: rgba(0, 0, 0, 0);background-color: rgba(0, 0, 0, 0);"><img src="https://images.emojiterra.com/twitter/v13.1/512px/270f.png" style="width: 0.7cm; height: 0.7cm;"></button></h3>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="row" *ngIf="patient.diabetes==1">
+                                            <h3>Diabetic subject <button (click)="setUnsetDiabetic()" style="border-color: rgba(0, 0, 0, 0);background-color: rgba(0, 0, 0, 0);"><img src="https://images.emojiterra.com/twitter/v13.1/512px/270f.png" style="width: 0.7cm; height: 0.7cm;"></button></h3>
+                                        </div>
+                                        <div class="row" *ngIf="patient.diabetes==0">
+                                            <h3>Not Diabetic subject <button (click)="setUnsetDiabetic()" style="border-color: rgba(0, 0, 0, 0);background-color: rgba(0, 0, 0, 0);"> <img src="https://images.emojiterra.com/twitter/v13.1/512px/270f.png" style="width: 0.7cm; height: 0.7cm;"></button></h3>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <img src={{patient.profile_photo}} class="card-img-top" alt="..." style="height:8cm; width: 10cm;">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div> <br><br><br>
+    <!--Second table with clinical report data-->
+    <div class="table-wrapper-scroll-y my-custom-scrollbar"
+        style=" margin:auto; width: 84rem; background-color: rgba(0, 67, 93, 0.281)">
+        <div *ngFor="let item of allHealthPatientData; let i=index">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>
+                            <h2>Clinical Report - {{item.stringDate}}</h2>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Health parameter</h4>
+                        </td>
+                        <td>
+                            <h4>Laboratory analysis </h4>
+                            <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"
+                                style="background-color: rgba(0, 0, 0, 0); width: 1cm; height: 1cm;">
+                                +
+                            </button>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Add new Laboratory Analysis
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-floating mb-3">
+                                                <input type="number" step="0.01" class="form-control" id="floatingInput"
+                                                    [(ngModel)]="newHealthData.serum_cholestoral">
+                                                <label for="floatingInput">Serum Cholestoral</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="number" step="0.01" class="form-control" id="floatingInput"
+                                                    [(ngModel)]="newHealthData.ST_depress_induced_by_exercise_relative_to_rest">
+                                                <label for="floatingInput">ST depress induced by exercise relative to
+                                                    rest</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="number" step="0.01" class="form-control" id="floatingInput"
+                                                    [(ngModel)]="newHealthData.leucocyte">
+                                                <label for="floatingInput">Leucocyte</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="number" step="0.01" class="form-control" id="floatingInput"
+                                                    [(ngModel)]="newHealthData.urea_nitrogen">
+                                                <label for="floatingInput">Urea nitrogen</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="number" step="0.01" class="form-control" id="floatingInput"
+                                                    [(ngModel)]="newHealthData.anion_gap">
+                                                <label for="floatingInput"> Anion gap</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="number" step="0.01" class="form-control" id="floatingInput"
+                                                    [(ngModel)]="newHealthData.bicarbonate">
+                                                <label for="floatingInput">Bicarbonate</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="number" step="0.01" class="form-control" id="floatingInput"
+                                                    [(ngModel)]="newHealthData.lactic_acid">
+                                                <label for="floatingInput">Lactic Acid</label>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary"
+                                                (click)="insertHealthData()">Insert</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <h4>Other information</h4>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-link" style="color: black; text-decoration: none;"
+                                (click)="setLineChart(item.id)">
+                                <h4>Last ECG</h4>
+                            </button>
+                            <div *ngIf="item.showECG" style="width: 5cm; background-color: rgba(0, 0, 0, 0.158)">
+                                <div class="dropdown">
+                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Change classification
+                                    </a>
+
+                                    <ul class="dropdown-menu">
+                                        <li><button type="button" class="btn btn-link"
+                                                style="color: black; text-decoration: none;"
+                                                (click)="updateECG(item,1)">Normal</button></li>
+                                        <li><button type="button" class="btn btn-link"
+                                                style="color: black; text-decoration: none;"
+                                                (click)="updateECG(item,2)">R on T premature ventricular
+                                                contraction</button></li>
+                                        <li><button type="button" class="btn btn-link"
+                                                style="color: black; text-decoration: none;"
+                                                (click)="updateECG(item,3)">Premature sopraventricular beat</button>
+                                        </li>
+                                        <li><button type="button" class="btn btn-link"
+                                                style="color: black; text-decoration: none;"
+                                                (click)="updateECG(item,4)">Premature ventricular contraction</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Heartbeat: {{item.heartbeat}}</td>
+                        <td>Serum Cholestoral: {{item.serum_cholestoral}}</td>
+                        <td>Chest pain type: {{item.chest_pain_type}}</td>
+                        <td>
+                            <div style="width: 400; height:250" *ngIf="item.showECG">
+                                <canvas baseChart width="400" height="150" [type]="'line'" [data]="lineChartData"
+                                    [options]="lineChartOptions" [legend]="lineChartLegend">
+                                </canvas>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> SpO2: {{item.oxygen_saturation}}</td>
+                        <td> ST depress induced by exercise relative to
+                            rest:{{item.ST_depress_induced_by_exercise_relative_to_rest}}</td>
+                        <td>Exercise induced angina: {{item.exercise_induced_angina}}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Systole: {{item.systole}}</td>
+                        <td>Leucocyte: {{item.leucocyte}}</td>
+                        <td>Atrial Fibrillation: {{item.atrial_fibrillation}}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Diastole: {{item.diastole}}</td>
+                        <td>Urea nitrogen: {{item.urea_nitrogen}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Breathing Rate: {{item.breathing_rate}}</td>
+                        <td>Anion gap: {{item.anion_gap}}</td>
+                        <td>
+                            <div *ngIf="patient.diabetes==1">
+                                Diabetic subject: YES
+                            </div>
+                            <div *ngIf="patient.diabetes==0">
+                                Diabetic subject: NO
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Glucose: {{item.blood_glucose}}</td>
+                        <td>Bicarbonate: {{item.bicarbonate}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Temperature: {{item.temperature}}</td>
+                        <td>Lactic Acid: {{item.lactic_acid}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>BMI: {{item.bmi}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div> <br><br><br><br>
+    <!--Third table with first digital twin-->
+    <div class="container"
+        style="background-color: rgba(2, 0, 93, 0.281); position: relative; width: 85rem; margin: auto;">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>
+                        <br><br><br><br>
+                        <div style="width: 400; height:150; position:absolute">
+                            <canvas baseChart width="600" height="500" [type]="'line'" [data]="lineChartDTData"
+                                [options]="lineChartDTOptions" [legend]="lineChartDTLegend">
+                            </canvas>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="position: relative; padding-left: 500px;">
+                            <img src="https://i.ibb.co/19X46f8/ezgif-com-gif-maker-4.gif" height="720" width="242"
+                                loop=infinite />
+                        </div>
+
+                    </td>
+
+                    <td>
+                        <br>
+                        <div style="margin-right: 100px;">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img src="https://img1.picmix.com/output/stamp/normal/3/9/1/0/1300193_00342.gif"
+                                                style="width:2.5cm; height: 2cm;" loop=infinite />
+                                        </td>
+                                        <td>
+                                            <div style="margin-top:0.5cm;">
+                                                <h3> {{HR_realTime}} Bpm</h3>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="padding-left: 0.5cm;">
+                                                <img src="https://static.wixstatic.com/media/47335e_a94271c221e44770abb0cf1204fdb197~mv2.png/v1/crop/x_0,y_36,w_2887,h_1763/fill/w_440,h_268,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/logo%20ila.png"
+                                                    loop=infinite style="width:1.5cm; height: 1.5cm;" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h3>{{BR_realtTime}} Bpm</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="padding-left: 0.5cm;">
+                                                <img src="https://prints.ultracoloringpages.com/18cf2eb76455687596a1658fb4fd6154.png"
+                                                    loop=infinite style="width:1.5cm; height: 1.5cm;" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h3>{{SpO2_realTime}}% SpO2</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img src="https://prints.ultracoloringpages.com/285c09e578e9670d36da35ba5ecf7a74.png"
+                                                style="width:2.5cm; height: 2cm;" loop=infinite />
+                                        </td>
+                                        <td>
+                                            <div style="margin-top:0.5cm;">
+                                                <h3> HRV: {{hrv_realTime}} ms</h3>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img src="https://prints.ultracoloringpages.com/98a6ad05fc43c232dbd08e8745e7e8e3.png"
+                                                style="width:2.5cm; height: 2cm;" loop=infinite />
+                                        </td>
+                                        <td>
+                                            <div style="margin-top:0.5cm;">
+                                                <h3>Hospitalization Risk: {{hospitalizationRisk}}%</h3>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img src="https://cdn-icons-png.flaticon.com/512/60/60152.png?w=360"
+                                                style="width:2.5cm; height: 2cm;" loop=infinite />
+                                        </td>
+                                        <td>
+                                            <div style="margin-top:0.5cm;">
+                                                <h3>Probability of dead: {{probabilityOfDead}}%</h3>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Caduceus.svg/1200px-Caduceus.svg.png"
+                                                style="width:1cm; height: 2cm;" loop=infinite />
+                                        </td>
+                                        <td>
+                                            <div *ngIf="healthClassification<0.5">
+                                                <div style="margin-top:0.5cm;">
+                                                    <h3>Not Healthy :(</h3>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="healthClassification>=0.5">
+                                                <div style="margin-top:0.5cm;">
+                                                    <h3>Healthy :)</h3>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div> <br><br><br><br>
+    <!--Fourth table with second digital twin-->
+    <div class="container"
+        style="background-color: rgba(2, 0, 93, 0.281); position: relative; width: 85rem; margin: auto;">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>
+                        <br><br><br><br>
+                        <div style="width: 400; height:150; position:absolute">
+                            <canvas baseChart width="600" height="500" [data]="healthBarCharData"
+                                [options]="healthBarChartOption" [plugins]="barChartPlugins" [legend]="barChartLegend"
+                                [type]="'bar'">
+                            </canvas>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="padding-left: 500px; position: relative">
+                            <img src="https://i.ibb.co/6vrp6Qv/ezgif-com-gif-maker-6.gif" height="656" width="224"
+                                loop=infinite />
+                        </div>
+
+                    </td>
+                    <td>
+                        <br><br><br><br><br><br>
+                        <div style="padding-right: 100px;">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img src="https://abrigospa.com/images/processo/camminata.gif"
+                                                style="width:3cm; height: 2cm;" loop=infinite />
+                                        </td>
+                                        <td>
+                                            <div style="margin-top:0.5cm;">
+                                                <h3> {{todaySteps}} Steps</h3>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="padding-left: 0.5cm;">
+                                                <img src="https://prints.ultracoloringpages.com/4f54ee5e7a59a531580b28a874ef000e.png"
+                                                    loop=infinite style="width:1.5cm; height: 1.5cm;" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h3>{{todayFloors}} Floors</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="padding-left: 0.5cm;">
+                                                <img src="https://prints.ultracoloringpages.com/0de561d40162000c47a1937c4e612e6c.png"
+                                                    loop=infinite style="width:1.5cm; height: 1.5cm;" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h3>{{todayDistance}} km</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img src="https://cdn.pixabay.com/photo/2016/04/01/09/22/abstract-1299318_640.png"
+                                                style="width:2cm; height: 2cm;" loop=infinite />
+                                        </td>
+                                        <td>
+                                            <div style="margin-top:0.5cm;">
+                                                <h3>{{todayCalories}} Kcal</h3>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-lg" style="background-color: #eae8e485;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="\home">HHMS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="\home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="\anagraphicAnalysis">Anagraphic analysis</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Prevision
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/heartHealth">Heart Health</a></li>
+                        <li><a class="dropdown-item" href="/deadProbability">Mortality</a></li>
+                        <li><a class="dropdown-item" href="#">Hospitalizations</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/patients">Patients</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="unset()" href="">Log-out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="bg-image"
+    style="background-image: url('https://www.mantovasitiweb.it/images/slider2.jpg');background-size: cover;">
+    <br><br>
+    <div class="container-fluid" style="padding-left: 2cm;">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="card" style="width: 20rem; background-color: #c4ff0100">
+                                <div class="card-body">
+                                    <h2>{{patient.name}} {{patient.surname}}</h2>
+                                    <h4>Birthday: {{patient.birthday}}</h4>
+                                    <h4>Fiscale Code: {{patient.fiscal_code}}</h4>
+                                    <div class="row" *ngIf="patient.sex==1">
+                                        <h4>Sex: Man</h4>
+                                    </div>
+                                    <div class="row" *ngIf="patient.sex==0">
+                                        <h4>Sex: Woman</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <img src={{patient.profile_photo}} class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><img src="https://i.ibb.co/Z8D1kcw/gif-1.gif" style=" padding-right: 0cm;"
+                                    loop=infinite /></td>
+                            <td>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <img src="https://img1.picmix.com/output/stamp/normal/3/9/1/0/1300193_00342.gif"
+                                                    style="width:2cm; height: 2cm; padding-right: 0.5cm;"
+                                                    loop=infinite />
+                                            </td>
+                                            <td>
+                                                <h3> {{HR_realTime}} Bpm</h3>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img src="https://i.ibb.co/K5J0Cw9/giphy.gif" loop=infinite
+                                                    style="width:1.5cm; height: 1.5cm;" />
+                                            </td>
+                                            <td>
+                                                <h3>{{BR_realtTime}} Bpm</h3>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img src="https://i.ibb.co/K5J0Cw9/giphy.gif" loop=infinite
+                                                    style="width:1.5cm; height: 1.5cm;" />
+                                            </td>
+                                            <td>
+                                                <h3>{{SpO2_realTime}}% SpO2</h3>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br><br><br>
+        <div class="row">
+            <div class="col">
+                <div class="card text-bg-light mb-3"
+                    style="width: 32rem; background-image: url('https://cdn.pixabay.com/photo/2021/03/19/16/50/notebook-6107937_960_720.png');">
+                    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true"
+                        class="scrollspy-example" tabindex="0" style="padding-left: 2.5cm;">
+                        <div class="card-body">
+                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active" *ngFor="let item of allHealthPatientData">
+                                        <div *ngIf="!item.update">
+                                            <h5>Health parameter</h5>
+                                            Heartbeat: {{item.heartbeat}} <br>
+                                            SpO2: {{item.oxygen_saturation}}<br>
+                                            Systole: {{item.systole}}<br>
+                                            Diastole: {{item.diastole}}<br>
+                                            Breathing Rate: {{item.breathing_rate}}<br>
+                                            Glucose: {{item.blood_glucose}}<br>
+                                            Temperature: {{item.temperature}}<br>
+                                            BMI: {{item.bmi}}<br>
+                                            <h5>Laboratory Analysis</h5>
+                                            Serum Cholestoral: {{item.serum_cholestoral}}<br>
+                                            ST depress induced by exercise relative to rest:
+                                            {{item.ST_depress_induced_by_exercise_relative_to_rest}}<br>
+                                            Leucocyte: {{item.leucocyte}}<br>
+                                            Urea nitrogen: {{item.urea_nitrogen}}<br>
+                                            Anion gap: {{item.anion_gap}}<br>
+                                            Bicarbonate: {{item.bicarbonate}}<br>
+                                            Lactic Acid: {{item.lactic_acid}}<br>
+                                            <h5>Other information</h5>
+                                            Chest pain type: {{item.chest_pain_type}}<br>
+                                            Exercise induced angina: {{item.exercise_induced_angina}}<br>
+                                            Atrial Fibrillation: {{item.atrial_fibrillation}}<br>
+                                        </div>
+                                        <!--<div *ngIf="item.update">
+                                            <div class="row g-3 align-items-center">
+                                                <div class="col-auto">
+                                                    <label for="inputPassword6" class="col-form-label">Serum
+                                                        Cholestoral</label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input type="text" id="inputPassword6" class="form-control"
+                                                        [(ngModel)]="modifiedHealthData.serum_cholestoral"
+                                                        aria-describedby="passwordHelpInline"
+                                                        placeholder={{item.serum_cholestoral}}>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 align-items-center">
+                                                <div class="col-auto">
+                                                    <label for="inputPassword6" class="col-form-label">ST depress
+                                                        induced by exercise relative to rest:</label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input type="text" id="inputPassword6" class="form-control"
+                                                        [(ngModel)]="modifiedHealthData.ST_depress_induced_by_exercise_relative_to_rest"
+                                                        aria-describedby="passwordHelpInline"
+                                                        placeholder={{item.ST_depress_induced_by_exercise_relative_to_rest}}>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 align-items-center">
+                                                <div class="col-auto">
+                                                    <label for="inputPassword6" class="col-form-label">Leucocyte</label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input type="text" id="inputPassword6" class="form-control"
+                                                        [(ngModel)]="modifiedHealthData.leucocyte"
+                                                        aria-describedby="passwordHelpInline"
+                                                        placeholder={{item.leucocyte}}>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 align-items-center">
+                                                <div class="col-auto">
+                                                    <label for="inputPassword6" class="col-form-label">Urea
+                                                        Nitrogen</label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input type="text" id="inputPassword6" class="form-control"
+                                                        [(ngModel)]="modifiedHealthData.urea_nitrogen"
+                                                        aria-describedby="passwordHelpInline"
+                                                        placeholder={{item.urea_nitrogen}}>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 align-items-center">
+                                                <div class="col-auto">
+                                                    <label for="inputPassword6" class="col-form-label">Anion Gap</label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input type="text" id="inputPassword6" class="form-control"
+                                                        [(ngModel)]="modifiedHealthData.anion_gap"
+                                                        aria-describedby="passwordHelpInline"
+                                                        placeholder={{item.anion_gap}}>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 align-items-center">
+                                                <div class="col-auto">
+                                                    <label for="inputPassword6"
+                                                        class="col-form-label">Bicarbonate</label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input type="text" id="inputPassword6" class="form-control"
+                                                        [(ngModel)]="modifiedHealthData.bicarbonate"
+                                                        aria-describedby="passwordHelpInline"
+                                                        placeholder={{item.bicarbonate}}>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 align-items-center">
+                                                <div class="col-auto">
+                                                    <label for="inputPassword6" class="col-form-label">Lactic
+                                                        acid</label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input type="text" id="inputPassword6" class="form-control"
+                                                        [(ngModel)]="modifiedHealthData.lactic_acid"
+                                                        aria-describedby="passwordHelpInline"
+                                                        placeholder={{item.lactic_acid}}>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 align-items-center">
+                                                <div class="col-auto">
+                                                    <label for="inputPassword6" class="col-form-label">Chest Pain
+                                                        Type</label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input type="text" id="inputPassword6" class="form-control"
+                                                        [(ngModel)]="modifiedHealthData.chest_pain_type"
+                                                        aria-describedby="passwordHelpInline"
+                                                        placeholder={{item.chest_pain_type}}>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 align-items-center">
+                                                <div class="col-auto">
+                                                    <label for="inputPassword6" class="col-form-label">Exercise induced
+                                                        Angina</label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input type="text" id="inputPassword6" class="form-control"
+                                                        [(ngModel)]="modifiedHealthData.exercise_induced_angina"
+                                                        aria-describedby="passwordHelpInline"
+                                                        placeholder={{item.exercise_induced_angina}}>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 align-items-center">
+                                                <div class="col-auto">
+                                                    <label for="inputPassword6" class="col-form-label">Atrial
+                                                        Fibrillation </label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input type="text" id="inputPassword6" class="form-control"
+                                                        [(ngModel)]="modifiedHealthData.atrial_fibrillation"
+                                                        aria-describedby="passwordHelpInline"
+                                                        placeholder={{item.atrial_fibrillation}}>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary" type="submit"
+                                                (click)="update(item)">Update</button>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="card" style="width: 18rem; background-color: #c4ff0100">
+                        <div class="card-body">
+                            <h5>Hospitalization Risk: {{hospitalizationRisk}}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card" style="width: 18rem; background-color: #c4ff0100">
+                        <div class="card-body">
+                            <h5>Probability of dead: {{probabilityOfDead}}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card" style="width: 18rem; background-color: #c4ff0100">
+                        <div class="card-body">
+                            <h2>WHAT IF ANALYSIS</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

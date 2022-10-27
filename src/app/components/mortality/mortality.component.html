@@ -1,0 +1,154 @@
+    <nav class="navbar navbar-expand-lg" style="background-color: #eae8e485;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="\home">HHMS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="\home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="\anagraphicAnalysis">Anagraphic analysis</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Prevision
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/heartHealth">Heart Health</a></li>
+                <li><a class="dropdown-item" href="/deadProbability">Mortality</a></li>
+                <li><a class="dropdown-item" href="#">Hospitalizations</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/patients">Patients</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/profile">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" (click)="unset()" href="">Log-out</a>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+<div class="bg-image" 
+style="background-image: url('https://www.mantovasitiweb.it/images/slider2.jpg');background-size: cover;">>    
+                <h1>Probability of Dead Analysis</h1>
+        <div class="card" style="width: 40rem;">
+            <div class="input-group">
+                <span class="input-group-text">Start Date - End Date</span>
+                <input type="date" class="form-control" id="inputStartDate" [(ngModel)]="startDate"
+                    name="inputStartDate">
+                <input type="date" class="form-control" id="inputEndDate" [(ngModel)]="endDate" name="inputEndDate">
+                <button type="submit" (click)="filterData()" class="btn btn-primary">Filter</button>
+            </div>
+        </div>
+        <br><br>
+        <div>
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col" max-width="xs">
+                        <div class="card" style="width: 30rem;" style="background-color: #c4ff0100">
+                            <div class="card-body" >
+                                <div>
+                                    <canvas baseChart width="440" height="400" [datasets]="radarChartDatasets" [options]="radarChartOptions"
+                                        [labels]="radarChartLabels" [type]="'radar'">
+                                    </canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col" max-width="xs">
+                        <div class="card; container-fluid" style="width: 18rem;background-color: #c4ff0100">
+    
+                        </div>
+                    </div>
+                    <div class="col" max-width="xs">
+                        <div class="card" style="width: 30rem; background-color: #c4ff0100;">
+                            <div class="card" style="width:5rem">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success dropdown-toggle"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{selectedMetric}}
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" (click)="selectMetrics('Systole')">Systole</a></li>
+                                        <li><a class="dropdown-item" (click)="selectMetrics('Diastole')">Diastole</a></li>
+                                        <li><a class="dropdown-item" (click)="selectMetrics('Heartbeat')">Heartbeat</a>
+                                        </li>
+                                        <li><a class="dropdown-item" (click)="selectMetrics('Bmi')">BMI</a></li>
+                                        <li><a class="dropdown-item"
+                                                (click)="selectMetrics('Bicarbonate')">Bicarbonate</a></li>
+                                        <li><a class="dropdown-item" (click)="selectMetrics('Anion Gap')">Anion Gap</a>
+                                        </li>
+                                        <li><a class="dropdown-item" (click)="selectMetrics('Breathing Rate')">Breathing
+                                                Rate</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body" style="background-color: #c4ff0100">
+                                <div style="background-color: #c4ff0100">
+                                    <canvas baseChart width="400" height="400" [type]="'line'" [data]="lineChartData"
+                                        [options]="lineChartOptions" [legend]="lineChartLegend">
+                                    </canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br><br><br>
+                <div class="row">
+                    <div class="col" max-width="xs">
+                        <div class="card" style="width: 30rem; background-color: #c4ff0100;">
+                            <div class="card" style="width:5rem">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success dropdown-toggle"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{selectedMetricBC1}}
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" (click)="selectMetricsBC('hyperthensive',1)">Hyperthensive</a></li>
+                                        <li><a class="dropdown-item" (click)="selectMetricsBC('diabetes',1)">Diabetes</a></li>
+                                        <li><a class="dropdown-item" (click)="selectMetricsBC('sex',1)">Sex</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <canvas baseChart width="400" height="380"[data]="healthBarCharData" [options]="healthBarChartOption"
+                                [plugins]="barChartPlugins" [legend]="barChartLegend" [type]="'bar'">
+                            </canvas>
+                        </div>
+                    </div>
+                    <div class="col" max-width="xs">
+                        <div class="card; container-fluid" style="width: 18rem;background-color: #c4ff0100">
+    
+                        </div>
+                    </div>
+                    <div class="col" max-width="xs">
+                        <div class="card" style="width: 30rem; background-color: #c4ff0100;">
+                            <div class="card" style="width:5rem">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success dropdown-toggle"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{selectedMetricBC2}}
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" (click)="selectMetricsBC('hyperthensive',2)">Hyperthensive</a></li>
+                                        <li><a class="dropdown-item" (click)="selectMetricsBC('diabetes',2)">Diabetes</a></li>
+                                        <li><a class="dropdown-item" (click)="selectMetricsBC('sex',2)">Sex</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <canvas baseChart width="400" height="380"[data]="healthBarCharData1" [options]="healthBarChartOption1"
+                                [plugins]="barChartPlugins" [legend]="barChartLegend" [type]="'bar'">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

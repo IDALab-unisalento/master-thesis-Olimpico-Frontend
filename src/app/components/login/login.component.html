@@ -1,0 +1,119 @@
+<div class="bg-image"style="background-image: url('https://www.mantovasitiweb.it/images/slider2.jpg');background-size: cover;"><br><br>
+        <table class="table" style="padding-top: 10cm;">
+        <tbody>
+            <tr style="width: 76rem;">
+                <td style="width:18rem; padding-left: 2cm;">
+                    <br><br>
+                    <h3>Login</h3>
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Username</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" [(ngModel)]="loginData.username"
+                                [ngModelOptions]="{standalone: true}">
+                            <div id="emailHelp" class="form-text">We'll never share your username and password with
+                                anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1"
+                                [(ngModel)]="loginData.password" [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <button type="submit" class="btn btn-primary" (click)="login()">Submit</button>
+                    </form>
+                    <div class="alert alert-danger" role="alert" *ngIf="!doctorBoolean">
+                        You aren't a doctor. This application is only for doctors
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="wrongCredential">
+                        Wrong Credential!
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="userNotFound">
+                        User not found, you can register on the portal
+                    </div>
+                </td>
+                <td style="width:5rem;"></td>
+                <td style="width:30rem; text-align: center;"><br><br>
+                    <h1>Heart</h1> <br>
+                    <h1>Health</h1> <br>
+                    <h1>Monitoring</h1> <br>
+                    <h1>System</h1> <br>
+                </td>
+                <td style="width:5rem;">
+                </td>
+                <td style="width:18rem; padding-right: 2cm;"><br><br>
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Registration</h3>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="n"
+                                        aria-describedby="emailHelp" [(ngModel)]="newDoctor.name"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Surname</label>
+                                    <input type="text" class="form-control" id="sur"
+                                        aria-describedby="emailHelp" [(ngModel)]="newDoctor.surname"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Birthday</label>
+                                    <input type="date" class="form-control" id="b"
+                                        aria-describedby="emailHelp" [(ngModel)]="newDoctor.birthday"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Username</label>
+                                    <input type="email" class="form-control" id="u"
+                                        aria-describedby="emailHelp" [(ngModel)]="newDoctor.username"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password"
+                                        aria-describedby="emailHelp" [(ngModel)]="newDoctor.password"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">specialization</label>
+                                    <input type="tel" class="form-control" id="s"
+                                        aria-describedby="emailHelp" [(ngModel)]="newDoctor.specialization"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Profile Photo</label>
+                                    <input type="text" class="form-control" id="p"
+                                        aria-describedby="emailHelp" [(ngModel)]="newDoctor.profile_photo"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Phone number</label>
+                                    <input type="text" class="form-control" id="nu"
+                                        aria-describedby="emailHelp" [(ngModel)]="newDoctor.phone_number"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="em"
+                                        aria-describedby="emailHelp" [(ngModel)]="newDoctor.email"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Hospital</label>
+                                    <input type="text" class="form-control" id="h"
+                                        aria-describedby="emailHelp" [(ngModel)]="newDoctor.hospital"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </form>
+                            <button type="submit" class="btn btn-primary" (click)="registrate()">Registrate</button>
+                            <div class="alert alert-success" role="alert" *ngIf="regSucc">
+                                Registration successful, you can login
+                            </div>
+                        </div>
+                      </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

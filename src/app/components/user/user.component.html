@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #eae8e485;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="\home">HHMS</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="\home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="\anagraphicAnalysis">Anagraphic analysis</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Prevision
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/heartHealth">Heart Health</a></li>
+              <li><a class="dropdown-item" href="/deadProbability">Mortality</a></li>
+              <li><a class="dropdown-item" href="#">Hospitalizations</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/patients">Patients</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)="unset()" href="">Log-out</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<div class="bg-image" style="background-image: url('https://www.mantovasitiweb.it/images/slider2.jpg');background-size: cover;">
+    <div class="container text-left">
+        <div class="row align-items-start">
+            <div class="col">
+                <h1>{{doctorUser.name}} {{doctorUser.surname}}</h1>
+                <h4>{{doctorUser.specialization}}</h4>
+            </div>
+            <div class="col">
+                <div class="card" style="width: 15rem;">
+                    <img src={{doctorUser.profile_photo}} class="card-img-top" alt="...">
+                    <div class="card-body">
+                        {{doctorUser.phone_number}}
+                        {{doctorUser.email}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+        </div>
+        <div class="row align-items-end">
+            <div class="col">
+                <h2>Your Patients</h2>
+                <div class="overflow-auto">
+                    <div *ngFor="let item of patientList;">
+                        <button type="button" class="btn btn-link" (click)="setPatient(item)" style="color: black;">{{item.name}} {{item.surname}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <h2>Your Hospital</h2>
+                {{hospital.name}}<br>
+                {{hospital.address}}<br>
+                {{hospital.country}}<br>
+                {{hospital.postal_code}}
+                {{hospital.province}}<br>
+                {{hospital.phone_number}}<br>
+                {{hospital.email}}
+            </div>
+        </div>
+    </div>
+</div>

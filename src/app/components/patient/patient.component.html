@@ -1,0 +1,174 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #eae8e485;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="\home">HHMS</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="\home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="\anagraphicAnalysis">Anagraphic analysis</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Prevision
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/heartHealth">Heart Health</a></li>
+              <li><a class="dropdown-item" href="/deadProbability">Mortality</a></li>
+              <li><a class="dropdown-item" href="#">Hospitalizations</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/patients">Patients</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)="unset()" href="">Log-out</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<div class="bg-image" 
+style="background-image: url('https://www.mantovasitiweb.it/images/slider2.jpg');background-size: cover;">    
+                <h1>All Patients</h1><br><br>
+    <div>
+        <div class="row">
+            <div class="col" style="padding-left: 3cm;">
+                <div class="card" style="width: 30rem; background-color: #c4ff0100" *ngFor="let item of allPatients; let index = index">
+                    <div class="card-body">
+                        <button (click)="setPatient(item)" type="button" class="btn btn-link" style="color: black;">
+                            <h3>
+                                {{item.name}} {{item.surname}}
+                            </h3>
+                        </button>
+                        <div style="width:7rem; padding-left: 0.3cm;">
+                            <div *ngIf="item.show">
+                                <button (click)="showHideDetail(item)" type="button" class="btn btn-success btn-sm">Hide
+                                    details</button>
+                            </div>
+                            <div *ngIf="!item.show">
+                                <button (click)="showHideDetail(item)" type="button" class="btn btn-success btn-sm">Show
+                                    details</button>
+                            </div>
+                        </div>
+                        
+                        <ul *ngIf="item.show">
+                            <li *ngIf="item.sex==1">Sex: Man</li>
+                            <li *ngIf="item.sex==0">Sex: Woman</li>
+                            <li>Birthday: {{item.birthday}}</li>
+                            <li>FIscal Code: {{item.fiscal_code}}</li>
+                            <li>Phone Number: {{item.phone_number}}</li>
+                            <li>Email: {{item.email}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-success" (click)="new = !new">Add new patient</button>
+                <div *ngIf="new">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Registration</h3>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="n"
+                                        aria-describedby="emailHelp" [(ngModel)]="newPatient.name"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Surname</label>
+                                    <input type="text" class="form-control" id="sur"
+                                        aria-describedby="emailHelp" [(ngModel)]="newPatient.surname"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Birthday</label>
+                                    <input type="date" class="form-control" id="b"
+                                        aria-describedby="emailHelp" [(ngModel)]="newPatient.birthday"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Username</label>
+                                    <input type="email" class="form-control" id="u"
+                                        aria-describedby="emailHelp" [(ngModel)]="newPatient.username"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password"
+                                        aria-describedby="emailHelp" [(ngModel)]="newPatient.password"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Sex</label>
+                                    <input type="tel" class="form-control" id="s"
+                                        aria-describedby="emailHelp" [(ngModel)]="newPatient.sex"
+                                        [ngModelOptions]="{standalone: true}" placeholder="Man/Woman">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Profile Photo</label>
+                                    <input type="text" class="form-control" id="p"
+                                        aria-describedby="emailHelp" [(ngModel)]="newPatient.profile_photo"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Phone number</label>
+                                    <input type="text" class="form-control" id="nu"
+                                        aria-describedby="emailHelp" [(ngModel)]="newPatient.phone_number"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                                    <input input type="email" name="email" ngModel email="true" class="form-control" id="em"
+                                        aria-describedby="emailHelp" [(ngModel)]="newPatient.email"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Fiscal code</label>
+                                    <input type="text" class="form-control" id="h"
+                                        aria-describedby="emailHelp" [(ngModel)]="newPatient.fiscal_code"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Hypertensive</label>
+                                    <input type="number" class="form-control" id="Hh"
+                                        aria-describedby="emailHelp" [(ngModel)]="newPatient.hypertensive"
+                                        [ngModelOptions]="{standalone: true}" placeholder="1(yes)/0(no)">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label" >Diabetes</label>
+                                    <input type="number" class="form-control" id="hHH"
+                                        aria-describedby="emailHelp" [(ngModel)]="newPatient.diabetes"
+                                        [ngModelOptions]="{standalone: true}" placeholder="1(yes)/0(no)">
+                                </div>
+                            </form>
+                            <button type="submit" class="btn btn-primary" (click)="registrate()">Registrate</button>
+                            <div class="alert alert-success" role="alert" *ngIf="regSucc">
+                                Registration successful, you can login
+                            </div>
+                            <div class="alert alert-success" role="alert" *ngIf="userAlredyExist">
+                                Username alredy used!
+                            </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div style="background-color:rgba(0, 0, 0, 0); height: 1000px;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
